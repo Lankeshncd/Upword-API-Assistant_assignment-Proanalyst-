@@ -2,7 +2,6 @@ import os
 import requests
 
 from dotenv import load_dotenv
-
 from langchain_community.vectorstores import FAISS
 from langchain_community.embeddings import HuggingFaceEmbeddings
 
@@ -70,6 +69,12 @@ Question:
     )
 
     result = response.json()
+
+    # Debugging
+    print(result)
+
+    if "choices" not in result:
+        return f"API Error: {result}"
 
     return result["choices"][0]["message"]["content"]
 
